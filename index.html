@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>片山4相サイクル × 山下GAAT 対応図</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1614;
+    --paper: #f4efe6;
+    --paper-dark: #ebe4d5;
+    --accent-warm: #c85a3a;
+    --accent-cool: #3a6a8c;
+    --accent-earth: #8a6d3b;
+    --accent-mute: #6b6661;
+    --gold: #b8935a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 60px 40px;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184, 147, 90, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(58, 106, 140, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(26, 22, 20, 0.15);
+  }
+
+  .title-jp {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 2.4em;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .title-en {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    letter-spacing: 0.25em;
+    color: var(--accent-mute);
+    text-transform: uppercase;
+  }
+
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75em;
+    letter-spacing: 0.2em;
+    color: var(--accent-earth);
+    margin-top: 20px;
+  }
+
+  .section-label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.9em;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .section-heading {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: var(--ink);
+  }
+
+  .section {
+    margin-bottom: 100px;
+  }
+
+  .circle-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .waveform-container {
+    background: var(--paper-dark);
+    padding: 40px 30px;
+    border: 1px solid rgba(26, 22, 20, 0.1);
+    margin: 40px 0;
+    border-radius: 2px;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 0.95em;
+    background: var(--paper-dark);
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 18px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(26, 22, 20, 0.12);
+    vertical-align: top;
+  }
+
+  .comparison-table th {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 0.85em;
+    letter-spacing: 0.15em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent-warm);
+    background: transparent;
+  }
+
+  .comparison-table .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--accent-cool);
+    font-size: 1.1em;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .katayama-cell {
+    color: var(--accent-warm);
+    font-weight: 500;
+  }
+
+  .yamashita-cell {
+    color: var(--accent-cool);
+    font-weight: 500;
+  }
+
+  .note {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.95em;
+    color: var(--accent-mute);
+    padding: 20px 24px;
+    border-left: 3px solid var(--gold);
+    background: rgba(184, 147, 90, 0.06);
+    margin: 30px 0;
+    font-style: italic;
+  }
+
+  .legend {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8em;
+    letter-spacing: 0.1em;
+  }
+
+  .legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .katayama-dot { background: var(--accent-warm); }
+  .yamashita-dot { background: var(--accent-cool); }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(26, 22, 20, 0.15);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75em;
+    letter-spacing: 0.2em;
+    color: var(--accent-mute);
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 30px 20px; }
+    .title-jp { font-size: 1.6em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="title-jp">片山4相サイクル × 山下GAAT</div>
+  <div class="title-en">Phase Correspondence — Corrected Mapping</div>
+  <div class="meta">2026.04.22 / Session 3</div>
+</header>
+
+<section class="section">
+  <div class="section-label">Figure 1</div>
+  <h2 class="section-heading">円環位相図 — エネルギー位相で揃えた対応</h2>
+
+  <div class="circle-container">
+    <svg viewBox="0 0 720 720" width="720" height="720">
+      <defs>
+        <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#b8935a" stop-opacity="0.15"/>
+          <stop offset="70%" stop-color="#b8935a" stop-opacity="0.02"/>
+          <stop offset="100%" stop-color="#b8935a" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="energyArc" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c85a3a" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#3a6a8c" stop-opacity="0.25"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Center glow -->
+      <circle cx="360" cy="360" r="280" fill="url(#centerGlow)"/>
+
+      <!-- Outer ring (Katayama) -->
+      <circle cx="360" cy="360" r="260" fill="none" stroke="#c85a3a" stroke-width="1.5" stroke-dasharray="2,4" opacity="0.5"/>
+
+      <!-- Inner ring (Yamashita) -->
+      <circle cx="360" cy="360" r="180" fill="none" stroke="#3a6a8c" stroke-width="1.5" stroke-dasharray="2,4" opacity="0.5"/>
+
+      <!-- Cardinal direction marks -->
+      <g stroke="#1a1614" stroke-width="0.5" opacity="0.3">
+        <line x1="360" y1="80" x2="360" y2="100"/>
+        <line x1="360" y1="620" x2="360" y2="640"/>
+        <line x1="80" y1="360" x2="100" y2="360"/>
+        <line x1="620" y1="360" x2="640" y2="360"/>
+      </g>
+
+      <!-- Season labels (Yamashita's framing) -->
+      <g font-family="Shippori Mincho" font-size="11" fill="#6b6661" letter-spacing="2">
+        <text x="360" y="55" text-anchor="middle">夏至 / ピーク</text>
+        <text x="360" y="680" text-anchor="middle">冬至 / 底</text>
+        <text x="55" y="365" text-anchor="middle" transform="rotate(-90, 55, 365)">春分</text>
+        <text x="680" y="365" text-anchor="middle" transform="rotate(90, 680, 365)">秋分</text>
+      </g>
+
+      <!-- Energy arc indicator (background) -->
+      <path d="M 360 100 A 260 260 0 0 1 620 360" fill="none" stroke="#c85a3a" stroke-width="40" opacity="0.08"/>
+      <path d="M 620 360 A 260 260 0 0 1 360 620" fill="none" stroke="#c85a3a" stroke-width="40" opacity="0.06"/>
+      <path d="M 360 620 A 260 260 0 0 1 100 360" fill="none" stroke="#3a6a8c" stroke-width="40" opacity="0.06"/>
+      <path d="M 100 360 A 260 260 0 0 1 360 100" fill="none" stroke="#3a6a8c" stroke-width="40" opacity="0.08"/>
+
+      <!-- OUTER RING: Katayama 4 phases -->
+      <!-- ③ Mode B (top, peak energy) -->
+      <g>
+        <circle cx="360" cy="100" r="32" fill="#c85a3a" opacity="0.95"/>
+        <text x="360" y="107" text-anchor="middle" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#f4efe6">③</text>
+        <text x="360" y="36" text-anchor="middle" font-family="Shippori Mincho" font-size="15" font-weight="600" fill="#c85a3a">モードB</text>
+        <text x="360" y="18" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="11" fill="#6b6661">挑戦・爆発</text>
+      </g>
+
+      <!-- ④ B→A' transition (right, descending) -->
+      <g>
+        <circle cx="620" cy="360" r="32" fill="#a85a5a" opacity="0.95"/>
+        <text x="620" y="367" text-anchor="middle" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#f4efe6">④</text>
+        <text x="700" y="355" text-anchor="middle" font-family="Shippori Mincho" font-size="15" font-weight="600" fill="#a85a5a">B→A'</text>
+        <text x="700" y="375" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="11" fill="#6b6661">疲労・下降</text>
+      </g>
+
+      <!-- ① Mode A (bottom, settled) -->
+      <g>
+        <circle cx="360" cy="620" r="32" fill="#8a6d3b" opacity="0.95"/>
+        <text x="360" y="627" text-anchor="middle" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#f4efe6">①</text>
+        <text x="360" y="695" text-anchor="middle" font-family="Shippori Mincho" font-size="15" font-weight="600" fill="#8a6d3b">モードA</text>
+        <text x="360" y="713" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="11" fill="#6b6661">適応・定常</text>
+      </g>
+
+      <!-- ② A→B transition (left, ascending) -->
+      <g>
+        <circle cx="100" cy="360" r="32" fill="#d48a3a" opacity="0.95"/>
+        <text x="100" y="367" text-anchor="middle" font-family="JetBrains Mono" font-size="20" font-weight="600" fill="#f4efe6">②</text>
+        <text x="25" y="355" text-anchor="middle" font-family="Shippori Mincho" font-size="15" font-weight="600" fill="#d48a3a">A→B</text>
+        <text x="25" y="375" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="11" fill="#6b6661">違和感・上昇</text>
+      </g>
+
+      <!-- INNER RING: Yamashita GAAT -->
+      <!-- Get (top-ish, peak) -->
+      <g>
+        <circle cx="360" cy="180" r="28" fill="#3a6a8c" opacity="0.9"/>
+        <text x="360" y="186" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#f4efe6">GET</text>
+        <text x="360" y="155" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#3a6a8c">得て</text>
+      </g>
+
+      <!-- Allow (right) -->
+      <g>
+        <circle cx="540" cy="360" r="28" fill="#5a8aa8" opacity="0.9"/>
+        <text x="540" y="366" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#f4efe6">ALLOW</text>
+        <text x="540" y="338" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#5a8aa8">手放す</text>
+      </g>
+
+      <!-- Accept (bottom) -->
+      <g>
+        <circle cx="360" cy="540" r="28" fill="#6a7a8a" opacity="0.9"/>
+        <text x="360" y="547" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#f4efe6">ACCEPT</text>
+        <text x="360" y="516" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#6a7a8a">受容する</text>
+      </g>
+
+      <!-- Transform (left) -->
+      <g>
+        <circle cx="180" cy="360" r="28" fill="#3a6a8c" opacity="0.9"/>
+        <text x="180" y="365" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="600" fill="#f4efe6">TRANSFORM</text>
+        <text x="180" y="338" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#3a6a8c">生まれ変わる</text>
+      </g>
+
+      <!-- Correspondence lines (dotted, showing the REAL mapping) -->
+      <g stroke="#b8935a" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" fill="none">
+        <!-- ③ peak ↔ GET peak -->
+        <line x1="360" y1="132" x2="360" y2="152"/>
+        <!-- ④ descending ↔ ALLOW descending -->
+        <line x1="588" y1="360" x2="568" y2="360"/>
+        <!-- ① bottom ↔ ACCEPT bottom -->
+        <line x1="360" y1="588" x2="360" y2="568"/>
+        <!-- ② ascending ↔ TRANSFORM ascending -->
+        <line x1="132" y1="360" x2="152" y2="360"/>
+      </g>
+
+      <!-- Rotation arrows -->
+      <g stroke="#c85a3a" stroke-width="2" fill="none" opacity="0.4">
+        <path d="M 420 90 Q 500 100 560 150" marker-end="url(#arrowhead)"/>
+      </g>
+
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="#c85a3a" opacity="0.4"/>
+        </marker>
+      </defs>
+
+      <!-- Center text -->
+      <g text-anchor="middle">
+        <text x="360" y="350" font-family="Shippori Mincho" font-size="13" font-weight="600" fill="#1a1614" letter-spacing="2">エネルギー位相</text>
+        <text x="360" y="372" font-family="Shippori Mincho" font-size="13" font-weight="600" fill="#1a1614" letter-spacing="2">による対応</text>
+        <text x="360" y="395" font-family="JetBrains Mono" font-size="9" fill="#6b6661" letter-spacing="2">phase-aligned</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot katayama-dot"></div>
+      <span>外周:片山4相 (当事者視点・内発的波動)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot yamashita-dot"></div>
+      <span>内周:山下GAAT (実践技法・自然暦同調)</span>
+    </div>
+  </div>
+
+  <div class="note">
+    両理論は同じ周期構造を共有するが、記述層が異なる。片山4相は「主体に湧き上がる波」、山下GAATは「自然のリズムに合わせる型」。位相は一致するが、語る層が違う。
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Figure 2</div>
+  <h2 class="section-heading">エネルギー波形 — 両理論の時系列同期</h2>
+
+  <div class="waveform-container">
+    <svg viewBox="0 0 900 380" width="100%" height="380">
+      <defs>
+        <linearGradient id="waveFill" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#c85a3a" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#c85a3a" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Axes -->
+      <line x1="60" y1="200" x2="840" y2="200" stroke="#1a1614" stroke-width="1" opacity="0.3"/>
+      <line x1="60" y1="60" x2="60" y2="340" stroke="#1a1614" stroke-width="1" opacity="0.3"/>
+
+      <!-- Y-axis label -->
+      <text x="30" y="130" font-family="Shippori Mincho" font-size="11" fill="#6b6661" transform="rotate(-90, 30, 130)">エネルギー</text>
+
+      <!-- X-axis label -->
+      <text x="450" y="365" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#6b6661">時間 (1サイクル)</text>
+
+      <!-- Horizontal guide lines -->
+      <line x1="60" y1="100" x2="840" y2="100" stroke="#1a1614" stroke-width="0.3" opacity="0.15" stroke-dasharray="2,4"/>
+      <line x1="60" y1="300" x2="840" y2="300" stroke="#1a1614" stroke-width="0.3" opacity="0.15" stroke-dasharray="2,4"/>
+
+      <!-- High/Low markers -->
+      <text x="52" y="105" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#6b6661">HIGH</text>
+      <text x="52" y="305" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#6b6661">LOW</text>
+
+      <!-- Vertical section dividers -->
+      <g stroke="#b8935a" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,3">
+        <line x1="255" y1="60" x2="255" y2="340"/>
+        <line x1="450" y1="60" x2="450" y2="340"/>
+        <line x1="645" y1="60" x2="645" y2="340"/>
+      </g>
+
+      <!-- Wave path: relaxation oscillation -->
+      <!-- Fill under curve -->
+      <path d="M 60 280 
+               Q 120 270, 180 240 
+               Q 230 210, 255 100 
+               L 340 90
+               Q 400 100, 450 180 
+               Q 500 260, 550 290 
+               Q 600 310, 645 310 
+               Q 730 305, 840 280
+               L 840 340 L 60 340 Z" 
+            fill="url(#waveFill)" opacity="0.4"/>
+
+      <!-- Main wave curve -->
+      <path d="M 60 280 
+               Q 120 270, 180 240 
+               Q 230 210, 255 100 
+               L 340 90
+               Q 400 100, 450 180 
+               Q 500 260, 550 290 
+               Q 600 310, 645 310 
+               Q 730 305, 840 280" 
+            fill="none" stroke="#c85a3a" stroke-width="2.5"/>
+
+      <!-- Phase markers on wave -->
+      <g>
+        <!-- ② rising -->
+        <circle cx="180" cy="240" r="7" fill="#d48a3a"/>
+        <text x="180" y="265" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#d48a3a">②</text>
+
+        <!-- ③ peak -->
+        <circle cx="300" cy="95" r="8" fill="#c85a3a"/>
+        <text x="300" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#c85a3a">③</text>
+
+        <!-- ④ descending -->
+        <circle cx="500" cy="240" r="7" fill="#a85a5a"/>
+        <text x="500" y="265" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#a85a5a">④</text>
+
+        <!-- ① settled -->
+        <circle cx="700" cy="305" r="7" fill="#8a6d3b"/>
+        <text x="700" y="330" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600" fill="#8a6d3b">①</text>
+      </g>
+
+      <!-- Yamashita GAAT labels (aligned with phase) -->
+      <g font-family="JetBrains Mono" font-size="10" fill="#3a6a8c" letter-spacing="1">
+        <text x="180" y="55" text-anchor="middle">TRANSFORM</text>
+        <text x="300" y="50" text-anchor="middle" font-weight="600">GET</text>
+        <text x="500" y="55" text-anchor="middle">ALLOW</text>
+        <text x="700" y="55" text-anchor="middle">ACCEPT</text>
+      </g>
+
+      <!-- Season marks at bottom -->
+      <g font-family="Shippori Mincho" font-size="10" fill="#6b6661">
+        <text x="180" y="330" text-anchor="middle">春分 → 立夏</text>
+        <text x="300" y="330" text-anchor="middle">夏至</text>
+        <text x="500" y="330" text-anchor="middle">秋分</text>
+        <text x="700" y="330" text-anchor="middle">冬至</text>
+      </g>
+
+      <!-- Legend -->
+      <g transform="translate(650, 80)">
+        <rect x="0" y="0" width="180" height="50" fill="#f4efe6" stroke="#1a1614" stroke-width="0.5" opacity="0.9"/>
+        <line x1="12" y1="18" x2="32" y2="18" stroke="#c85a3a" stroke-width="2.5"/>
+        <text x="40" y="22" font-family="Zen Kaku Gothic New" font-size="10" fill="#1a1614">片山:心理エネルギー</text>
+        <text x="12" y="40" font-family="JetBrains Mono" font-size="9" fill="#3a6a8c" letter-spacing="0.5">GAAT:自然暦との同期</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="note">
+    片山の③(ピーク)と山下の Get(夏至)が一致。片山の①(底)と山下の Accept(冬至)が一致。両者のエネルギー波形は完全に同期する。逆に言えば、昨日の機械的対応(③=Accept)では波形が一致せず、これが片山さんの感じた違和感の正体だった。
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Figure 3</div>
+  <h2 class="section-heading">対応表 — 改訂版</h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th style="width: 8%">相</th>
+        <th style="width: 25%">片山4相 — 主体の内発的波動</th>
+        <th style="width: 12%">エネルギー</th>
+        <th style="width: 25%">山下GAAT — 自然暦との同期</th>
+        <th style="width: 30%">対応の質</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="phase-num">③</td>
+        <td class="katayama-cell">
+          <strong>モードB</strong><br>
+          新しいことに挑戦する、<br>荒々しい生活、爆発
+        </td>
+        <td>ピーク</td>
+        <td class="yamashita-cell">
+          <strong>Get</strong> (得て、生きて活かして)<br>
+          春分→夏至<br>スパークリングタイム
+        </td>
+        <td>挑戦のエネルギーが外に向かって噴出。当事者には「爆発的挑戦」、外から見れば「生命の開花」。</td>
+      </tr>
+      <tr>
+        <td class="phase-num">④</td>
+        <td class="katayama-cell">
+          <strong>B → A' 遷移</strong><br>
+          荒々しい生活に疲れ、<br>安定を求める
+        </td>
+        <td>下降</td>
+        <td class="yamashita-cell">
+          <strong>Allow</strong> (手放して、委ねて)<br>
+          夏至→秋分<br>アソビタイム
+        </td>
+        <td>ピークの後の弛緩。当事者には「疲れ」、外から見れば「意図や計画を手放すアソビ」。</td>
+      </tr>
+      <tr>
+        <td class="phase-num">①</td>
+        <td class="katayama-cell">
+          <strong>モードA</strong><br>
+          生存のため、稼ぐため、<br>新環境への適応
+        </td>
+        <td>底(安定)</td>
+        <td class="yamashita-cell">
+          <strong>Accept</strong> (受容して)<br>
+          秋分→冬至<br>ハーベストタイム
+        </td>
+        <td>落ち着いた定常状態。当事者には「日常の適応」、外から見れば「成果が実り受け取る時期」。</td>
+      </tr>
+      <tr>
+        <td class="phase-num">②</td>
+        <td class="katayama-cell">
+          <strong>A → B 遷移</strong><br>
+          あきてきて、内発的動機と<br>順応行動の乖離に気づく
+        </td>
+        <td>上昇</td>
+        <td class="yamashita-cell">
+          <strong>Transform</strong> (生まれ変わって)<br>
+          冬至→春分<br>ドリームタイム
+        </td>
+        <td>底からの再生・上昇。当事者には「違和感・内圧上昇」、外から見れば「合意されていない現実からの創造」。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <div class="section-label">Figure 4</div>
+  <h2 class="section-heading">記述層の相補性 — 両理論が異なる層を扱う構造</h2>
+
+  <div class="circle-container">
+    <svg viewBox="0 0 900 360" width="100%" height="360">
+      <!-- Katayama layer (upper) -->
+      <g>
+        <rect x="60" y="60" width="780" height="100" fill="#c85a3a" fill-opacity="0.08" stroke="#c85a3a" stroke-width="1.5"/>
+        <text x="80" y="90" font-family="Shippori Mincho" font-size="16" font-weight="600" fill="#c85a3a">片山4相 — 記述科学 (descriptive)</text>
+        <text x="80" y="115" font-family="Zen Kaku Gothic New" font-size="12" fill="#1a1614">当事者視点・内発的波動・一人称</text>
+        <text x="80" y="138" font-family="Zen Kaku Gothic New" font-size="12" fill="#6b6661">「人間の中で自然に何が起きているか」</text>
+        <text x="820" y="138" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#6b6661" letter-spacing="1">WHAT IS</text>
+      </g>
+
+      <!-- Bridge -->
+      <g>
+        <line x1="450" y1="160" x2="450" y2="200" stroke="#b8935a" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="460" y="185" font-family="Shippori Mincho" font-size="11" fill="#b8935a" font-style="italic">同じ位相構造を共有</text>
+      </g>
+
+      <!-- Yamashita layer (lower) -->
+      <g>
+        <rect x="60" y="200" width="780" height="100" fill="#3a6a8c" fill-opacity="0.08" stroke="#3a6a8c" stroke-width="1.5"/>
+        <text x="80" y="230" font-family="Shippori Mincho" font-size="16" font-weight="600" fill="#3a6a8c">山下GAAT — 実践技法 (prescriptive)</text>
+        <text x="80" y="255" font-family="Zen Kaku Gothic New" font-size="12" fill="#1a1614">観察者視点・自然暦同調・二人称的ガイド</text>
+        <text x="80" y="278" font-family="Zen Kaku Gothic New" font-size="12" fill="#6b6661">「どう生きるとよいか、どう同調させるか」</text>
+        <text x="820" y="278" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#6b6661" letter-spacing="1">HOW TO</text>
+      </g>
+
+      <!-- Labels on sides -->
+      <text x="30" y="115" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#6b6661" transform="rotate(-90, 30, 115)">記述</text>
+      <text x="30" y="255" text-anchor="middle" font-family="Shippori Mincho" font-size="11" fill="#6b6661" transform="rotate(-90, 30, 255)">実践</text>
+    </svg>
+  </div>
+
+  <div class="note">
+    両者は矛盾せず、層が異なる。山下氏は<strong>規範的</strong>——自然のリズムに合わせる処方箋。片山氏は<strong>記述的</strong>——実際に人間の中で起きている波の科学的記述。役割分担が明確になる。
+  </div>
+</section>
+
+<footer>
+  Phase Correspondence Diagram / Session 3 / 2026.04.22
+</footer>
+
+</div>
+</body>
+</html>
